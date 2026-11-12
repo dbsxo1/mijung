@@ -72,8 +72,6 @@ function characterSVG({ face = 'blank', tool = true, hat = true, imgBase = 'img/
     <path d="M120 212 L118 232 M140 212 L142 232" ${s} stroke-width="2.5"/>
     <circle cx="118" cy="234" r="3" fill="#fff" ${s} stroke-width="2"/>
     <circle cx="142" cy="234" r="3" fill="#fff" ${s} stroke-width="2"/>
-    <text x="130" y="262" text-anchor="middle" font-size="20" font-weight="900" fill="${BLUE}"
-          stroke="#fff" stroke-width="3" paint-order="stroke" font-family="sans-serif">노가다</text>
     <!-- 팔 -->
     ${face === 'peace' ? peaceArms : `
     <ellipse cx="78" cy="238" rx="11" ry="27" fill="${HOOD_D}" ${s} transform="rotate(14 78 238)"/>
