@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>몽글이 키우기</title>
+  <meta name="description" content="알에서 태어난 몽글이를 돌보고 키우는 작은 웹 게임">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥚</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <!-- 시작 화면 -->
+    <section id="start" class="screen">
+      <div class="egg-big">🥚</div>
+      <h1>몽글이 키우기</h1>
+      <p class="sub">알을 하나 주웠어요. 이름을 지어주세요!</p>
+      <form id="startForm">
+        <input id="nameInput" maxlength="10" placeholder="이름 (예: 몽글이)" autocomplete="off">
+        <button type="submit" class="primary">키우기 시작</button>
+      </form>
+    </section>
+
+    <!-- 게임 화면 -->
+    <section id="game" class="screen hidden">
+      <header class="top">
+        <div>
+          <div id="petName" class="pet-name">몽글이</div>
+          <div class="meta"><span id="stageLabel">알</span> · <span id="ageLabel">0일째</span></div>
+        </div>
+        <div class="coins">⭐ <span id="coins">0</span></div>
+      </header>
+
+      <div class="growth">
+        <div class="growth-bar"><div id="growthFill"></div></div>
+        <span id="growthText">성장 0%</span>
+      </div>
+
+      <div id="room" class="room">
+        <div id="zzz" class="zzz hidden">Z z z</div>
+        <div id="bubble" class="bubble hidden"></div>
+        <div id="pet" class="pet"></div>
+        <div id="poops" class="poops"></div>
+        <div id="fx" class="fx"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span>🍙 배부름</span><div class="bar"><div id="bar-hunger"></div></div></div>
+        <div class="stat"><span>💖 행복</span><div class="bar"><div id="bar-happy"></div></div></div>
+        <div class="stat"><span>🫧 청결</span><div class="bar"><div id="bar-clean"></div></div></div>
+        <div class="stat"><span>⚡ 기운</span><div class="bar"><div id="bar-energy"></div></div></div>
+      </div>
+
+      <nav class="actions">
+        <button data-act="feed">🍙<small>밥주기</small></button>
+        <button data-act="play">🎾<small>놀아주기</small></button>
+        <button data-act="wash">🛁<small>씻기기</small></button>
+        <button data-act="sleep" id="sleepBtn">🌙<small>재우기</small></button>
+        <button data-act="snack">🍰<small>간식 (⭐5)</small></button>
+        <button data-act="pet">✋<small>쓰다듬기</small></button>
+      </nav>
+
+      <p id="log" class="log"></p>
+      <button id="resetBtn" class="link">처음부터 다시하기</button>
+    </section>
+
+    <!-- 미니게임: 별 잡기 -->
+    <section id="mini" class="overlay hidden">
+      <div class="mini-box">
+        <div class="mini-head">
+          <b>별 잡기!</b>
+          <span>⏱ <span id="miniTime">10</span>초 · ⭐ <span id="miniScore">0</span></span>
+        </div>
+        <div id="miniField" class="mini-field"></div>
+      </div>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>

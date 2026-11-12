@@ -1,0 +1,122 @@
+:root {
+  --bg: #fff6ee;
+  --card: #ffffff;
+  --ink: #3b2f2f;
+  --muted: #9a8a85;
+  --accent: #ff8fa3;
+  --accent-dark: #e8657d;
+  --room-top: #ffe9d6;
+  --room-bottom: #ffd8b8;
+  --hunger: #ffb347;
+  --happy: #ff8fa3;
+  --clean: #6ec6ff;
+  --energy: #9be36d;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.app { width: 100%; max-width: 440px; padding: 16px; }
+.hidden { display: none !important; }
+
+/* 시작 화면 */
+#start { text-align: center; padding-top: 12vh; }
+.egg-big { font-size: 96px; animation: wobble 1.6s ease-in-out infinite; display: inline-block; }
+h1 { margin: 12px 0 4px; font-size: 28px; }
+.sub { color: var(--muted); margin: 0 0 24px; }
+#startForm { display: flex; flex-direction: column; gap: 10px; }
+#nameInput {
+  font: inherit; font-size: 18px; padding: 14px; border-radius: 14px;
+  border: 2px solid #f0dcd2; text-align: center; background: #fff; color: var(--ink);
+}
+#nameInput:focus { outline: none; border-color: var(--accent); }
+.primary {
+  font: inherit; font-size: 18px; font-weight: 700; padding: 14px; border: 0; border-radius: 14px;
+  background: var(--accent); color: #fff; cursor: pointer;
+}
+.primary:active { background: var(--accent-dark); }
+
+/* 상단 */
+.top { display: flex; justify-content: space-between; align-items: center; }
+.pet-name { font-size: 22px; font-weight: 800; }
+.meta { color: var(--muted); font-size: 14px; }
+.coins { background: #fff; padding: 8px 14px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 0 #f0dcd2; }
+
+.growth { display: flex; align-items: center; gap: 10px; margin: 12px 0; font-size: 13px; color: var(--muted); }
+.growth-bar { flex: 1; height: 8px; background: #f3e4dc; border-radius: 99px; overflow: hidden; }
+#growthFill { height: 100%; width: 0; background: linear-gradient(90deg, #ffd36e, #ff8fa3); transition: width .4s; }
+
+/* 방 */
+.room {
+  position: relative; height: 300px; border-radius: 24px; overflow: hidden;
+  background: linear-gradient(var(--room-top) 0 68%, var(--room-bottom) 68% 100%);
+  box-shadow: inset 0 -4px 0 rgba(0,0,0,.05);
+  transition: filter .6s;
+}
+.room.night { filter: brightness(.55) saturate(.7); }
+.pet {
+  position: absolute; left: 50%; bottom: 40px; width: 170px; height: 170px;
+  transform: translateX(-50%); cursor: pointer; transition: left 1.2s ease-in-out;
+}
+.pet svg { width: 100%; height: 100%; overflow: visible; }
+.pet.idle svg { animation: bob 2.4s ease-in-out infinite; }
+.pet.jump svg { animation: jump .5s ease-out; }
+.pet.shake svg { animation: wobble .5s ease-in-out 2; }
+.pet.sleeping svg { animation: breathe 3s ease-in-out infinite; }
+
+.bubble {
+  position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+  background: #fff; padding: 8px 14px; border-radius: 16px; font-size: 15px; white-space: nowrap;
+  box-shadow: 0 2px 0 rgba(0,0,0,.06);
+}
+.zzz { position: absolute; top: 60px; right: 26%; font-weight: 800; color: #fff; animation: float 2s ease-in-out infinite; }
+.poops { position: absolute; inset: auto 0 14px 0; height: 40px; }
+.poop { position: absolute; bottom: 0; font-size: 28px; cursor: pointer; }
+.fx { position: absolute; inset: 0; pointer-events: none; }
+.particle { position: absolute; font-size: 26px; animation: rise 1s ease-out forwards; }
+
+/* 스탯 */
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin: 16px 0; }
+.stat span { font-size: 13px; color: var(--muted); }
+.bar { height: 12px; background: #f3e4dc; border-radius: 99px; overflow: hidden; margin-top: 4px; }
+.bar > div { height: 100%; width: 50%; border-radius: 99px; transition: width .4s, background .4s; }
+#bar-hunger { background: var(--hunger); }
+#bar-happy { background: var(--happy); }
+#bar-clean { background: var(--clean); }
+#bar-energy { background: var(--energy); }
+.bar > div.low { background: #ff5d5d !important; }
+
+/* 버튼 */
+.actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.actions button {
+  font: inherit; font-size: 26px; padding: 10px 4px; border: 0; border-radius: 16px; background: #fff;
+  box-shadow: 0 3px 0 #f0dcd2; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  color: var(--ink);
+}
+.actions button small { font-size: 13px; }
+.actions button:active { transform: translateY(2px); box-shadow: 0 1px 0 #f0dcd2; }
+.actions button:disabled { opacity: .4; cursor: default; }
+
+.log { min-height: 22px; text-align: center; color: var(--muted); font-size: 14px; margin: 14px 0 4px; }
+.link { display: block; margin: 0 auto; background: none; border: 0; color: #c7b7b1; font: inherit; font-size: 12px; text-decoration: underline; cursor: pointer; }
+
+/* 미니게임 */
+.overlay { position: fixed; inset: 0; background: rgba(40,20,20,.45); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 10; }
+.mini-box { background: #fff; border-radius: 20px; width: 100%; max-width: 400px; padding: 14px; }
+.mini-head { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.mini-field { position: relative; height: 320px; background: #1f2a4a; border-radius: 14px; overflow: hidden; }
+.star { position: absolute; font-size: 34px; cursor: pointer; user-select: none; animation: pop .25s ease-out; }
+
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes breathe { 0%,100% { transform: scale(1, 1); } 50% { transform: scale(1.03, .97); } }
+@keyframes jump { 0% { transform: translateY(0); } 40% { transform: translateY(-40px); } 100% { transform: translateY(0); } }
+@keyframes wobble { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
+@keyframes float { 0%,100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(-10px); opacity: .5; } }
+@keyframes rise { from { transform: translateY(0) scale(.6); opacity: 1; } to { transform: translateY(-80px) scale(1.2); opacity: 0; } }
+@keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
