@@ -11,10 +11,10 @@ function characterSVG({ face = 'blank', tool = true, hat = true, imgBase = 'img/
 
   // 머리 사진 배치 (가로 w, 세로 h, 아래 끝이 y=208 근처)
   const HEADS = {
-    blank: { file: 'head-blank.png', w: 140, h: 191, hatX: 130, hatS: 1.0, tilt: 0 },
+    blank: { file: 'head-blank.png', w: 142, h: 190, hatX: 130, hatS: 1.05, tilt: 0 },
     laugh: { file: 'head-laugh.png', w: 166, h: 192, hatX: 124, hatS: 1.1, tilt: -9 },
-    peace: { file: 'head-peace.png', w: 250, h: 171, hatX: 131, hatS: 0.82, tilt: 0 },
-    tired: { file: 'head-blank.png', w: 140, h: 191, hatX: 130, hatS: 1.0, tilt: 6 },
+    peace: { file: 'head-peace.png', w: 128, h: 195, hatX: 131, hatS: 0.95, tilt: 0 },
+    tired: { file: 'head-blank.png', w: 142, h: 190, hatX: 130, hatS: 1.05, tilt: 6 },
   };
   const H = HEADS[face] || HEADS.blank;
   const bottom = 212;
@@ -38,6 +38,21 @@ function characterSVG({ face = 'blank', tool = true, hat = true, imgBase = 'img/
       <path d="M198 268 L230 268 L226 300 Q214 312 202 300 Z" fill="#9aa3ad" ${s}/>
     </g>`;
 
+  // 브이 손 (만화 손)
+  const vHand = (x, y, flip) => `
+    <g transform="translate(${x} ${y}) scale(${flip * 1.25} 1.25)">
+      <rect x="-10" y="-30" width="8" height="25" rx="4" fill="${SKIN}" ${s} transform="rotate(-16 -6 -5)"/>
+      <rect x="2" y="-30" width="8" height="25" rx="4" fill="${SKIN}" ${s} transform="rotate(16 6 -5)"/>
+      <circle cx="0" cy="2" r="12" fill="${SKIN}" ${s}/>
+      <path d="M-6 0 q6 5 12 0" fill="none" stroke="#d9a58a" stroke-width="2"/>
+    </g>`;
+  const peaceArms = `
+    <path d="M86 206 Q60 196 56 150" fill="none" stroke="${L}" stroke-width="25" stroke-linecap="round"/>
+    <path d="M86 206 Q60 196 56 150" fill="none" stroke="${HOOD_D}" stroke-width="19" stroke-linecap="round"/>
+    <path d="M174 206 Q200 196 204 150" fill="none" stroke="${L}" stroke-width="25" stroke-linecap="round"/>
+    <path d="M174 206 Q200 196 204 150" fill="none" stroke="${HOOD_D}" stroke-width="19" stroke-linecap="round"/>
+    ${vHand(55, 140, 1)}${vHand(205, 140, -1)}`;
+
   const sweat = face === 'tired' ? `
     <path d="M190 70 q7 12 0 19 q-7 -7 0 -19Z" fill="#8fd0ff" stroke="#4a9ad8" stroke-width="2"/>
     <path d="M60 96 q6 10 0 16 q-6 -6 0 -16Z" fill="#8fd0ff" stroke="#4a9ad8" stroke-width="2"/>
@@ -60,11 +75,12 @@ function characterSVG({ face = 'blank', tool = true, hat = true, imgBase = 'img/
     <text x="130" y="262" text-anchor="middle" font-size="20" font-weight="900" fill="${BLUE}"
           stroke="#fff" stroke-width="3" paint-order="stroke" font-family="sans-serif">노가다</text>
     <!-- 팔 -->
+    ${face === 'peace' ? peaceArms : `
     <ellipse cx="78" cy="238" rx="11" ry="27" fill="${HOOD_D}" ${s} transform="rotate(14 78 238)"/>
     <circle cx="73" cy="263" r="9" fill="${SKIN}" ${s}/>
     ${shovel}
     <ellipse cx="184" cy="234" rx="11" ry="25" fill="${HOOD_D}" ${s} transform="rotate(-28 184 234)"/>
-    <circle cx="201" cy="250" r="9" fill="${SKIN}" ${s}/>
+    <circle cx="201" cy="250" r="9" fill="${SKIN}" ${s}/>`}
     ${hatSVG}
     ${sweat}
   </svg>`;
